@@ -477,6 +477,7 @@ ATCA_STATUS calib_execute_command(ATCAPacket* packet, ATCADevice device)
     do
     {
 #ifdef ATCA_NO_POLL
+        (void)ATCA_TRACE(status, "ATCA_NO_POLL=YES");
         if ((status = calib_get_execution_time(packet->opcode, device)) != ATCA_SUCCESS)
         {
             return status;
@@ -484,10 +485,13 @@ ATCA_STATUS calib_execute_command(ATCAPacket* packet, ATCADevice device)
         execution_or_wait_time = device->execution_time_msec;
         max_delay_count = 0;
 #else
+        (void)ATCA_TRACE(status, "ATCA_NO_POLL=NO");
         execution_or_wait_time = ATCA_POLLING_INIT_TIME_MSEC;
         max_delay_count = ATCA_POLLING_MAX_TIME_MSEC / ATCA_POLLING_FREQUENCY_TIME_MSEC;
 
     #if ATCA_CA2_SUPPORT
+        (void)ATCA_TRACE(status, "ATCA_CA2_SUPPORT=YES");
+
         if ((ATCA_SWI_GPIO_IFACE == device->mIface.mIfaceCFG->iface_type) && (atcab_is_ca2_device(device->mIface.mIfaceCFG->devtype)))
         {
             if ((status = calib_get_execution_time(packet->opcode, device)) != ATCA_SUCCESS)
@@ -500,6 +504,8 @@ ATCA_STATUS calib_execute_command(ATCAPacket* packet, ATCADevice device)
     #endif
 #endif
         retries = atca_iface_get_retries(&device->mIface);
+   //     (void)ATCA_TRACE(status, "retries=%d",retries);
+
         do
         {
             if ((uint8_t)ATCA_DEVICE_STATE_ACTIVE != device->device_state)

@@ -112,13 +112,14 @@ ATCA_STATUS calib_write(ATCADevice device, uint8_t zone, uint16_t address, const
         {
             require_mac = true;
         }
+(void)ATCA_TRACE(0, "info")
 
         if ((status = atWrite(atcab_get_device_type_ext(device), packet, require_mac)) != ATCA_SUCCESS)
         {
             (void)ATCA_TRACE(status, "atWrite - failed");
             break;
         }
-
+(void)ATCA_TRACE(0, "info")
         if ((status = atca_execute_command(packet, device)) != ATCA_SUCCESS)
         {
             (void)ATCA_TRACE(status, "calib_write - execution failed");
@@ -126,6 +127,8 @@ ATCA_STATUS calib_write(ATCADevice device, uint8_t zone, uint16_t address, const
         }
 
     } while (false);
+
+(void)ATCA_TRACE(0, "info")
 
     calib_packet_free(packet);
     return status;

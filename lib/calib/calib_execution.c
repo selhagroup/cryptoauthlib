@@ -236,7 +236,7 @@ ATCA_STATUS calib_get_execution_time(uint8_t opcode, ATCADevice device)
     ATCA_STATUS status = ATCA_SUCCESS;
     const device_execution_time_t *execution_times;
     uint8_t i, no_of_commands;
-
+(void)ATCA_TRACE(0, "info");
 
     switch (device->mIface.mIfaceCFG->devtype)
     {
@@ -323,7 +323,7 @@ ATCA_STATUS calib_get_execution_time(uint8_t opcode, ATCADevice device)
 ATCA_STATUS calib_execute_send(ATCADevice device, uint8_t word_address, uint8_t* txdata, uint16_t txlength)
 {
     ATCA_STATUS status;
-
+(void)ATCA_TRACE(0, "info");
     if ((NULL == txdata) || (0u == txlength))
     {
         return ATCA_TRACE(ATCA_BAD_PARAM, "NULL pointer encountered");
@@ -359,7 +359,7 @@ ATCA_STATUS calib_execute_send(ATCADevice device, uint8_t word_address, uint8_t*
 ATCA_STATUS calib_execute_receive(ATCADevice device, uint8_t device_address, uint8_t* rxdata, uint16_t* rxlength)
 {
     ATCA_STATUS status;
-
+(void)ATCA_TRACE(0, "info");
     if ((NULL == rxlength) || (NULL == rxdata))
     {
         return ATCA_TRACE(ATCA_BAD_PARAM, "NULL pointer encountered");
@@ -473,7 +473,7 @@ ATCA_STATUS calib_execute_command(ATCAPacket* packet, ATCADevice device)
     uint16_t rxsize;
     uint8_t device_address = atcab_get_device_address(device);
     int32_t retries;
-
+(void)ATCA_TRACE(0, "info");
     do
     {
 #ifdef ATCA_NO_POLL

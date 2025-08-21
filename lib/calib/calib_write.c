@@ -112,14 +112,14 @@ ATCA_STATUS calib_write(ATCADevice device, uint8_t zone, uint16_t address, const
         {
             require_mac = true;
         }
-(void)ATCA_TRACE(0, "info")
+(void)ATCA_TRACE(0, "info");
 
         if ((status = atWrite(atcab_get_device_type_ext(device), packet, require_mac)) != ATCA_SUCCESS)
         {
             (void)ATCA_TRACE(status, "atWrite - failed");
             break;
         }
-(void)ATCA_TRACE(0, "info")
+(void)ATCA_TRACE(0, "info");
         if ((status = atca_execute_command(packet, device)) != ATCA_SUCCESS)
         {
             (void)ATCA_TRACE(status, "calib_write - execution failed");
@@ -128,7 +128,7 @@ ATCA_STATUS calib_write(ATCADevice device, uint8_t zone, uint16_t address, const
 
     } while (false);
 
-(void)ATCA_TRACE(0, "info")
+(void)ATCA_TRACE(0, "info");
 
     calib_packet_free(packet);
     return status;
@@ -164,7 +164,7 @@ ATCA_STATUS calib_write_zone(ATCADevice device, uint8_t zone, uint16_t slot, uin
     {
         return ATCA_TRACE(ATCA_BAD_PARAM, "Invalid length received");
     }
-
+(void)ATCA_TRACE(0, "info");
     do
     {
         // The get address function checks the remaining variables
@@ -229,7 +229,7 @@ ATCA_STATUS calib_write_enc(ATCADevice device, uint16_t key_id, uint8_t block, c
     uint8_t mac[WRITE_MAC_SIZE] = { 0 };
     uint8_t other_data[4] = { 0 };
     uint16_t addr;
-
+(void)ATCA_TRACE(0, "info");
     do
     {
         // Verify inputs parameters

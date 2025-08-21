@@ -63,7 +63,7 @@ ATCA_STATUS calib_read_zone(ATCADevice device, uint8_t zone, uint16_t slot, uint
     ATCAPacket * packet = NULL;
     ATCA_STATUS status;
     uint16_t addr;
-
+(void)ATCA_TRACE(0, "info");
     do
     {
         // Check the input parameters
@@ -128,7 +128,7 @@ ATCA_STATUS calib_read_serial_number(ATCADevice device, uint8_t* serial_number)
 {
     ATCA_STATUS status;
     uint8_t read_buf[ATCA_BLOCK_SIZE];
-
+(void)ATCA_TRACE(0, "info");
     if (NULL == serial_number)
     {
         return ATCA_TRACE(ATCA_BAD_PARAM, "NULL pointer received");

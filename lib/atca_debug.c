@@ -37,7 +37,7 @@ void atca_trace_config(FILE* fp)
 
 ATCA_STATUS atca_trace_msg(ATCA_STATUS status, const char * msg)
 {
-    if (ATCA_SUCCESS != status)
+//    if (ATCA_SUCCESS != status)
     {
         (void)fprintf(NULL != g_trace_fp ? g_trace_fp : stderr, msg, status);
         (void)fflush(g_trace_fp);

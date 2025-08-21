@@ -63,7 +63,7 @@ ATCA_STATUS calib_read_zone(ATCADevice device, uint8_t zone, uint16_t slot, uint
     ATCAPacket * packet = NULL;
     ATCA_STATUS status;
     uint16_t addr;
-    printk("%s:%d:zone=%d,slot=%d,block=%d,offset=%d,len=%d\r\n",__FILE__, __LINE__,zone,slot,block,offset,len);
+    printf("%s:%d:zone=%d,slot=%d,block=%d,offset=%d,len=%d\r\n",__FILE__, __LINE__,zone,slot,block,offset,len);
 
     do
     {

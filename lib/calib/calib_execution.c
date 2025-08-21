@@ -505,6 +505,8 @@ ATCA_STATUS calib_execute_command(ATCAPacket* packet, ATCADevice device)
 #endif
         retries = atca_iface_get_retries(&device->mIface);
    //     (void)ATCA_TRACE(status, "retries=%d",retries);
+            printk("%s:%d:retries=%d\r\n",__FILE__, __LINE__,retries);
+
 
         do
         {
@@ -534,10 +536,14 @@ ATCA_STATUS calib_execute_command(ATCAPacket* packet, ATCADevice device)
             /* coverity[misra_c_2012_rule_18_1_violation]  calib_execute_send will not update the members of the packet structure */
             if (ATCA_RX_NO_RESPONSE == (status = calib_execute_send(device, packet->reserved, (uint8_t*)&packet->txsize, (uint16_t)packet->txsize)))
             {
+            printk("%s:%d:retries=%d:no response\r\n",__FILE__, __LINE__, retries);
+
                 device->device_state = (uint8_t)ATCA_DEVICE_STATE_UNKNOWN;
             }
             else
             {
+                printk("%s:%d:retries=%d:RX_RESPONSE\r\n",__FILE__, __LINE__, retries);
+
                 if ((uint8_t)ATCA_DEVICE_STATE_ACTIVE != device->device_state)
                 {
                     device->device_state = (uint8_t)ATCA_DEVICE_STATE_ACTIVE;
@@ -562,6 +568,8 @@ ATCA_STATUS calib_execute_command(ATCAPacket* packet, ATCADevice device)
             (void)memset(packet->data, 0, sizeof(packet->data));
             // receive the response
             rxsize = (uint16_t)sizeof(packet->data);
+            printk("%s:%d:rxsize=%d\r\n",__FILE__, __LINE__, rxsize);
+
 
             if (ATCA_SUCCESS == (status = calib_execute_receive(device, device_address, packet->data, &rxsize)))
             {
